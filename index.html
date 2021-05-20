@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./vendor/fontawesome-free-5.15.3-web/fontawesome-free-5.15.3-web/css/all.min.css">
+    <title>JQuery_Project</title>
+    <style>
+        .head{
+            position: sticky;
+            top: 10px;
+            /* background-color: antiquewhite; */
+            z-index: 100;
+            
+        }
+       
+            .side-bar{
+                position: sticky;
+               top: 5px;
+                z-index: 1000;
+            }
+        
+        /* .d{
+            width: 300px;
+            position: fixed;
+             top: 10px;
+             z-index: 100;
+            padding: 0;
+            background-color:#f3f3f3;
+           display: block !important;
+        } */
+        .products{
+            border: none !important;
+        }
+        .products img{
+            /* width: auto;
+            height: 150px; */
+            /* margin-bottom: -182px;
+            margin-left: 20px; */
+            transition: 0.5s;
+            width: auto;
+            height: 150px;
+            transition: 0.5s;
+            margin-bottom: -72px;
+            margin-left: 18px;
+        }
+        .products img:hover{
+            transform: scale(1.05) rotate(-20deg);
+
+        }
+        .card-title{
+            margin-top: 59px;
+        }
+        .img-cart{
+         height: 50px;   
+        }
+        .over-scroll{
+            overflow: scroll;
+        }
+        @media screen and (max-width:770px) {
+            .products img{
+                width: auto;
+                height: 250px;
+              
+            }
+            .side-bar{
+                width: 400px;
+                /* height: 720px; */
+                position: fixed;
+                top: 10px;
+                z-index: 1000;
+                padding: 0;
+                margin-left: -100%;
+                /* background-color:#0ac495; */
+                 display: block !important;
+                 background-color:  #f3f3f3;
+             }
+          .item-in-cart{
+              margin-left: 10px;
+          }
+             .cart-ph{
+                width: 296px;
+               
+                
+             }
+             #category{
+                width: 205px;
+             }
+             .cart-ph{
+                width: 385px;
+                margin-bottom: 10px;
+              
+             }
+        }
+        @media screen and (max-width:480px) {
+            .products img{
+                width: auto;
+                height: 377px;
+                margin-bottom: -409px;
+                margin-left: 5px;
+                padding: 10px;
+                transition: 0.5s;
+            }
+            .card-body {
+                 margin-top: 30px;
+                 margin-bottom: 20px;
+            }
+            .card-title{
+                margin-top: 396px;
+
+             }
+             .head{
+                /* position: sticky;
+                 top: 10px;
+                  z-index: 100; */
+                 background-color: #f3f3f3;
+                
+             }
+             .side-bar{
+                width: 300px;
+                /* height: 720px; */
+                position: fixed;
+                top: 10px;
+                z-index: 1000;
+                padding: 0;
+                margin-left: -100%;
+                /* background-color:#0ac495; */
+                 display: block !important;
+                 background-color:  #f3f3f3;
+             }
+          
+             .cart-ph{
+                width: 296px;
+              
+             }
+             /* .ph-cart{
+                 margin-left: 239px;
+             } */
+             .cart-header-ph{
+                 /* width: 200px; */
+             }
+             #category{
+                width: 205px;
+                margin-top: 5px;
+             }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid ">
+        <div class="row justify-content-lg-center ">
+            <div class="col-12 col-lg-10  ">
+                <div class="row">
+                    
+                    <div class="col-12  col-lg-9 min-vh-100 ">
+                        <div class="vh-100 over-scroll ">
+                            <div class="d-md-flex bg-secondary  mt-2 align-items-end justify-content-between p-2 head">
+                                <div class="">
+                                    <h4 class="mb-0 text-primary">MY Shop</h4>
+                                    <small class="text-dark-50">JQuery & bootstrap</small>
+                                    <div class="btn btn-outline-primary d-lg-none d-sm-block show-btn" style="position: absolute;z-index: 1;top: 10px;
+                                    right: 20px;">
+                                       <i class=" fas fa-shopping-cart"></i>
+                                   </div>
+                                </div>
+                                
+                                <div class="">
+                                    <div class="form-row ">
+                                        
+                                           <div class=" ">
+                                               <input type="text" class=" form-control" placeholder="Search Item" id="search">
+                                           </div>
+                                           <div class="mx-md-2">
+                                               <select name="" class=" custom-select "  id="category" >
+                                                   <option value="0">All Category</option>
+                                               </select>
+                                           </div>
+                                     </div>
+                                    
+                                </div>
+                            </div>
+                            <div id="product"class="card-columns ">
+                             
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-12 side-bar ">
+                       <div class="vh-100 over-scroll ">
+                           <div class="d-flex align-items-center justify-content-between mt-2 position-sticky p-1   "style="
+                            background-color: #f3f3f3;
+                           position: fixed;
+                           top: 5px;
+                           z-index: 3000;
+                           
+                       ">
+                               <div class=" ">
+                                   <h4 class="mb-0 text-primary " >MY Shop
+                                 </h4>
+                            
+                                   <small class="text-dark-50 ">Added Items</small>
+                                   
+                                   <h4 class="ph-cart" >
+                                    <span class="item-in-card mr-1 ">0</span>
+                                    <i class="fas fa-shopping-cart text-primary "></i>
+                                     
+                                </h4>
+                               </div>
+                               <div class="">
+                                   
+                                <i class=" fas fa-times close d-lg-none" style="margin-top: -41px;"></i>
+                               </div>
+                           </div>
+                           <div id="cart" class="" >
+
+                           </div>
+                           <div class="total-cart-price position-sticky bg-white"style="bottom:0;z-index: 20000;">
+
+                           </div>
+                       </div>
+                    </div>
+                   
+                </div>
+            
+            </div>
+            
+        </div>
+    </div>
+    <script src="./vendor/jquery-3.3.1.min.js"></script>
+    <script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./api/fakestore.js"></script>
+    <script src="api/cat.js"></script>
+    
+    <script>
+        $(".show-btn").click(function () {
+            $(".side-bar").animate({marginLeft:0})
+        });
+        $(".close").click(function () {
+            $(".side-bar").animate({marginLeft:"-100%"})
+        });
+        // let p=document.getElementById("product");
+        // let d=data;
+        // function toshort(str,max=50) {
+        //     if(str.length>max){
+        //             return str.substring(0,max)+"...."
+        //     }
+        //     return str;
+        // };
+        // d.map(el=>{
+        //     p.innerHTML+=`<div class="card products  mb-lg-0">
+        //                         <img src="${el.image}" class=" img-fluid card-img-top" alt="">
+        //                           <div class="card-body border rounded  ">
+        //                               <p class="card-title text-primary">${toshort(el.title,30)}</p>
+        //                                <small class="text-black-50">${toshort(el.description,150)}</small>
+        //                                <div class="d-flex align-items-end justify-content-between">
+        //                                     <span class="font-weight-bolder " >${el.price}$</span>
+        //                                     <div class="btn btn-outline-primary">
+        //                                         <i class="fas fa-cart-plus"></i>
+        //                                     </div>
+        //                                </div>
+        //                       </div>
+                                 
+        //                     </div>`
+        // });
+            function totalresult() {
+                let current=$(".cart-price").length;
+
+                $(".item-in-card ").html(current);
+               if(current>0){
+                let total=$(".cart-price").toArray().map(el=>el.innerHTML).reduce((x,y)=>Number(x)+Number(y));
+               console.log(typeof total)
+                $(".total-cart-price").html(`<div class="d-flex align-items-center p-3 justify-content-between">
+                                <h4>Total</h4>
+                                <h4 class="" >$ <span>${Number(total).toFixed(2)}</span></h4>
+                            </div>`);
+               }else{
+                $(".total-cart-price").html("Empty Cart")
+               }
+                
+            }
+        let product=[];
+        function toShow(x) {
+        $("#product").empty();
+            x.map(el=>{
+            $("#product").append(`<div class="card products  mb-lg-0">
+                                 <img src="${el.image}" class=" img-fluid card-img-top" alt="">
+                                    <div class="card-body border rounded  ">
+                                        <p class="card-title text-primary">${el.title}</p>
+                                        <small class="text-black-50">${toshort(el.description,150)}</small>
+                                        <div class="d-flex align-items-end justify-content-between">
+                                            <span class="font-weight-bolder " >${el.price}$</span>
+                                            <div class="btn btn-outline-primary add-cart " data-id="${el.id}">
+                                                <i class="fas fa-cart-plus"></i>
+                                                </div>
+                                        </div>
+                                    </div>
+
+                             </div>`);
+           });
+        };
+        $.get("https://fakestoreapi.com/products",function (data) {
+             product=data;
+            console.log(product);
+            toShow(product);
+        });
+        function toshort(str,max=50) {
+            if(str.length>max){
+                    return str.substring(0,max)+"...."
+            }
+            return str;
+        };
+        $("#search").on("keyup",function () {
+            let searchvalue = $(this).val().toLowerCase();
+
+
+            if(searchvalue.trim().length){
+
+                let filter=product.filter(products=>{
+                    if(products.title.toLowerCase().indexOf(searchvalue)>-1){
+                        return product;
+                    }
+                });
+                toShow(filter);
+            }
+
+        //     console.log(products)
+        //    if(searchvalue.trim().length){
+        //     $(".products").filter(function () {
+        //         $(this).toggle($(this).text().toLowerCase().indexOf(searchvalue) > -1)
+        //     });
+        //    }
+        });
+        $.get('https://fakestoreapi.com/products/categories',function (data) {
+            data.map(cat=>{$("#category").append(`<option value="${cat}">${cat}</option>`)})
+
+        });
+        $("#category").on("change",function () {
+                let selectcategory=$(this).val();
+                console.log(selectcategory)
+               if(selectcategory !=0){
+                let filter=product.filter(products=>{
+                    if(products.category === selectcategory ){
+                        return product;
+                        
+                    }
+                });
+                toShow(filter);
+               }
+               else{
+                    toShow(product)
+               }
+            
+        })
+        $("#product").delegate(".add-cart","click",function () {
+            let currentID=$(this).attr("data-id");
+            let currenInfo=product.filter(el=>el.id == currentID)[0];
+           
+            if($(".item-in-cart").toArray().map(el=>el.getAttribute("cart-id")).includes(currentID)){
+                        alert("You was already Added")
+            }else{
+                $("#cart").append(`
+            <div class="card  cart-ph item-in-cart mt-4 position-relative"cart-id=${currenInfo.id}>
+                                    <div class="card-body c d-flex justify-content-between align-items-center ">
+                                        <img src="${currenInfo.image}"  class="img-cart" alt="">
+                                        <i class=" fas fa-trash-alt btn btn-outline-danger cart-del-btn"></i>
+                                    </div>
+                                    <p>
+                                       ${currenInfo.title}
+                                    </p>
+                                    <div class="d-flex justify-content-between justify-content-center">
+                                        <div class=" form-row">
+                                                <button class="btn btn-outline-primary mb-2 mx-2 minus">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                                <input type="number" class="form-control quantity" unit-price="${currenInfo.price}" value="1" min="1" style="width: 115px !important;">
+                                                <button class="btn btn-outline-primary add mb-2 mx-1  ">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                        </div>
+                                        <p>$ <span class="cart-price">${currenInfo.price}</span></p>
+                                    </div>
+                                </div>
+
+            `)
+            }
+           totalresult();
+
+        });
+        $("#cart").delegate(".cart-del-btn","click",function () {
+            $(this).parentsUntil("#cart").remove();
+            totalresult();
+        });
+      
+        
+            $("#cart").delegate(".add","click",function () {
+               let q= $(this).siblings(".quantity").val();
+               let p=$(this).siblings(".quantity").attr("unit-price");
+               let newq=Number(q)+1;
+               let cost=newq*p;
+               $(this).siblings(".quantity").val(newq);
+               $(this).parent().siblings("p").find(".cart-price").html(cost.toFixed(2));
+               totalresult();
+            });
+            $("#cart").delegate(".minus","click",function () {
+               let q= $(this).siblings(".quantity").val();
+               let p=$(this).siblings(".quantity").attr("unit-price");
+                    if(q>1){
+                        let newq=Number(q)-1;
+                        let cost=newq*p;
+                        $(this).siblings(".quantity").val(newq);
+                        $(this).parent().siblings("p").find(".cart-price").html(cost.toFixed(2));
+                        totalresult();
+                    }
+            });
+            $("#cart").delegate(".quantity","keyup change",function () {
+               let q= $(this).val();
+               let p=$(this).attr("unit-price");
+               let newq=Number(q)+1;
+               let cost=newq*p;
+               $(this).val(newq);
+               $(this).parent().siblings("p").find(".cart-price").html(cost.toFixed(2));
+               totalresult();
+            });
+
+        
+    </script>
+</body>
+</html>
